@@ -1,9 +1,13 @@
 import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.text.SimpleDateFormat;
 import java.awt.Graphics;
 import javax.imageio.*;
+import java.util.*;
 public class CarParking extends JFrame{
 	private Container ctn;
 	public static void main(String[] args) {
@@ -30,14 +34,15 @@ public class CarParking extends JFrame{
 					g.drawImage(img,0,0,null);
 				}
 			};
-			JLabel title=new JLabel("PARKING LOT");
+			JLabel title=new JLabel("PARKING SYSTEM");
+		
 			title.setFont(new Font("Arial",Font.PLAIN,30));
-			title.setLocation(200,50);
+			title.setLocation(250,50);
 			title.setSize(500,60);
 			title.setBackground(Color.pink);
 			title.setOpaque(true);
 			p1 p1=new p1();
-			p1.setLocation(200,200);
+			p1.setLocation(310,200);
 			add(p1);add(title);
 		}
 		private class p1 extends Panel
@@ -54,6 +59,11 @@ public class CarParking extends JFrame{
 				date[0]=new JComboBox<String>();
 				date[1]=new JComboBox<String>();
 				date[2]=new JComboBox<String>();
+				
+				Month m=new Month();
+				date[0]=new JComboBox<String>(m.getDate());
+				date[1]=new JComboBox<String>(m.getTime());
+				date[2]=new JComboBox<String>(m.getHour());
 				for(int i=0;i<3;i++)
 				{
 					la[i].setLocation(50, 50+i*70);
@@ -61,24 +71,40 @@ public class CarParking extends JFrame{
 					la[i].setFont(new Font("Arial",Font.PLAIN,20));
 					la[i].setOpaque(true);
 					add(la[i]);
+			
 					date[i].setLocation(200,50+i*70);
 					date[i].setSize(110,50);
 					date[i].setOpaque(true);
+
 					add(date[i]);
 				}
 				
-				JButton b1=new JButton("ют╥б");
-				b1.setLocation(160,300);
+				JButton b1=new JButton("ADD");
+				b1.setLocation(180,300);
 				b1.setOpaque(true);
 				b1.setSize(100,50);
-				event_1 e=new event_1(date);
+				JButton b2=new JButton("CANCEL");
+				b2.setLocation(70,300);
+				b2.setOpaque(true);
+				b2.setSize(100,50);
+				event_1 e=new event_1();
 				b1.addActionListener(e);
-				add(b1);
-				setSize(400,400);
+				b2.addActionListener(e);
+				add(b1);add(b2);
+				setSize(380,400);
 			}
 
 		}
 		
 	}
-	
+	class event_1 implements ActionListener
+	{
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+		
+	}
 }
