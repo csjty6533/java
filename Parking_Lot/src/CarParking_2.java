@@ -16,6 +16,9 @@ public class CarParking_2 extends JFrame{
 			p2 p2=new p2();
 			p2.setLocation(30,100);
 			add(p2);
+			p3 p3=new p3();
+			p3.setLocation(800,100);
+			add(p3);
 			setBackground(Color.pink);
 		}
 	}
@@ -51,7 +54,24 @@ public class CarParking_2 extends JFrame{
 	{
 		p3()
 		{
-			
+			GridLayout gl=new GridLayout(22,1);
+			setLayout(gl);
+			setBackground(Color.gray);
+			JLabel title=new JLabel("time schedule");
+			title.setFont(new Font("Arial",Font.PLAIN,20));
+			add(title);
+			JLabel time[]=new JLabel[20];
+			for(int i=0;i<time.length;i++)
+			{
+				time[i]=new JLabel("");
+				time[i].setFont(new Font("Arial",Font.PLAIN,20));
+				add(time[i]);
+			}
+			JButton b=new JButton("click");
+			b.setFont(new Font("Arial",Font.PLAIN,20));
+			b.addActionListener(new event_2());
+			add(b);
+			setSize(180,500);
 		}
 		p3(String[] a1)
 		{

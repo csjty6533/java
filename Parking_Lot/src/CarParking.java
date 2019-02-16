@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics;
+import javax.imageio.*;
 public class CarParking extends JFrame{
 	private Container ctn;
 	public static void main(String[] args) {
@@ -17,8 +20,16 @@ public class CarParking extends JFrame{
 	{
 		TimePanel()
 		{
+			
 			setLayout(null);
-			setBackground(Color.pink);
+			BufferedImage img=new BufferedImage(1000,700,BufferedImage.TYPE_INT_RGB);
+			Graphics g2=img.getGraphics();
+			JPanel p=new JPanel() {
+				public void paintComponent(Graphics g)
+				{
+					g.drawImage(img,0,0,null);
+				}
+			};
 			JLabel title=new JLabel("PARKING LOT");
 			title.setFont(new Font("Arial",Font.PLAIN,30));
 			title.setLocation(200,50);
@@ -60,7 +71,8 @@ public class CarParking extends JFrame{
 				b1.setLocation(160,300);
 				b1.setOpaque(true);
 				b1.setSize(100,50);
-				b1.addActionListener(new event_1());
+				event_1 e=new event_1(date);
+				b1.addActionListener(e);
 				add(b1);
 				setSize(400,400);
 			}
