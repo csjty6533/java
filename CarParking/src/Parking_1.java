@@ -7,6 +7,7 @@ public class Parking_1 extends JFrame{
 	private String dateS[],timeS[];
 	private JComboBox<String>dateC[];
 	private int index1,index2;
+	private JComboBox<String> combo1,combo2;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new Parking_1();
@@ -84,6 +85,8 @@ public class Parking_1 extends JFrame{
 			dateC[1]=new JComboBox<String>(timeS);
 			dateC[0].setLocation(20,30);
 			dateC[1].setLocation(20,100);
+			dateC[0].addActionListener(new event_2());
+			dateC[1].addActionListener(new event_3());
 			for(int i=0;i<2;i++)
 			{
 				dateC[i].setSize(200,30);
@@ -109,12 +112,9 @@ public class Parking_1 extends JFrame{
 	{
 		public void actionPerformed(ActionEvent e) 
 		{
-			// TODO Auto-generated method stub
 			if(s.getText().isEmpty());
 			else 
 			{	
-				dateC[0].addActionListener(new event_2());
-				dateC[1].addActionListener(new event_2());
 				int x=Integer.parseInt(s.getText().toString());
 				new Parking_2(x,index1,index2);
 				System.out.println(x+""+index1+""+index2);
@@ -134,8 +134,9 @@ public class Parking_1 extends JFrame{
 		public void actionPerformed(ActionEvent e) 
 		{
 			// TODO Auto-generated method stub
-			JComboBox<String> combo=(JComboBox<String>)e.getSource();
-			index1=combo.getSelectedIndex();		
+
+			combo1=(JComboBox<String>)e.getSource();
+			index1=combo1.getSelectedIndex();		
 		}
 	}
 	private class event_3 implements ActionListener
@@ -143,8 +144,8 @@ public class Parking_1 extends JFrame{
 		public void actionPerformed(ActionEvent e) 
 		{
 			// TODO Auto-generated method stub
-			JComboBox<String> combo=(JComboBox<String>)e.getSource();
-			index2=combo.getSelectedIndex();		
+			combo2=(JComboBox<String>)e.getSource();
+			index2=combo2.getSelectedIndex();		
 		}
 	}
 }
