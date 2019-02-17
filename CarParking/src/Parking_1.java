@@ -91,12 +91,17 @@ public class Parking_1 extends JFrame{
 				
 				add(dateC[i]);
 			}
-			JButton select=new JButton("SELECT");
-			select.setSize(100,50);
-			select.setLocation(60,200);
-			select.setOpaque(true);
-			select.addActionListener(new event_1());
-			add(select);
+			JButton b1=new JButton("ADD");
+			b1.setLocation(130,200);
+			b1.setOpaque(true);
+			b1.setSize(90,30);
+			JButton b2=new JButton("CANCEL");
+			b2.setLocation(20,200);
+			b2.setOpaque(true);
+			b2.setSize(90,30);
+			b1.addActionListener(new event_1());
+			b2.addActionListener(new event_4());
+			add(b1);add(b2);
 			setSize(250,300);
 		}
 	}
@@ -115,6 +120,14 @@ public class Parking_1 extends JFrame{
 				System.out.println(x+""+index1+""+index2);
 			}
 		}
+	}
+	private class event_4 implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			new Parking_3();
+		}
+		
 	}
 	private class event_2 implements ActionListener
 	{
