@@ -19,13 +19,14 @@ public class Parking_1 extends JFrame{
 		Title p1=new Title();
 		p1.setSize(500,60);
 		p1.setLocation(250,50);
-		p1.setBackground(Color.black);
+		p1.setBackground(Color.gray);
 		Calendar p2=new Calendar();
 		p2.setSize(370,200);
 		p2.setLocation(120,200);
-		p2.setBackground(Color.black);
+		p2.setBackground(Color.gray);
 		Date p3=new Date();
 		p3.setLocation(600,200);
+		p3.setBackground(Color.gray);
 		add(p1);add(p2);add(p3);
 		setSize(1000,700);setVisible(true);
 	}
@@ -36,8 +37,6 @@ public class Parking_1 extends JFrame{
 			setLayout(new FlowLayout());
 			JLabel title=new JLabel("PARKING SYSTEM");
 			title.setFont(new Font("Arial",Font.PLAIN,30));
-			title.setBackground(Color.pink);
-			title.setOpaque(true);
 			add(title);
 		}
 	}
@@ -47,8 +46,9 @@ public class Parking_1 extends JFrame{
 		{
 			GridLayout gl=new GridLayout(6,7);
 			setLayout(gl);
+			JLabel la=new JLabel(" Jan");la.setFont(new Font("Verdana",Font.PLAIN,20));
+			add(la);
 			for(int i=0;i<3;i++)add(new JLabel(""));
-			add(new JLabel("1¿ù"));
 			for(int i=0;i<5;i++)add(new JLabel(""));
 			b=new JButton[31];
 			for(int i=0;i<31;i++)
@@ -82,8 +82,8 @@ public class Parking_1 extends JFrame{
 			for(int i=0;i<timeS.length;i++)timeS[i]=new String((i+1)+"hours");
 			dateC[0]=new JComboBox<String>(dateS);
 			dateC[1]=new JComboBox<String>(timeS);
-			dateC[0].setLocation(10,10);
-			dateC[1].setLocation(10,100);
+			dateC[0].setLocation(20,30);
+			dateC[1].setLocation(20,100);
 			for(int i=0;i<2;i++)
 			{
 				dateC[i].setSize(200,30);
@@ -97,7 +97,7 @@ public class Parking_1 extends JFrame{
 			select.setOpaque(true);
 			select.addActionListener(new event_1());
 			add(select);
-			setSize(300,400);
+			setSize(250,300);
 		}
 	}
 	private class event_1 implements ActionListener
