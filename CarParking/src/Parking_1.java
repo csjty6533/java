@@ -2,12 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 public class Parking_1 extends JFrame{
-	private JButton b[];
-	private JButton s;
-	private String dateS[],timeS[];
-	private JComboBox<String>dateC[];
+	private JButton calendarbutton[];
+	private JButton getdate;
 	private int index1,index2;
-	private JComboBox<String> combo1,combo2;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new Parking_1();
@@ -16,20 +13,42 @@ public class Parking_1 extends JFrame{
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(new Container());
-		setLayout(null);
-		Title p1=new Title();
-		p1.setSize(500,60);
-		p1.setLocation(250,50);
-		p1.setBackground(Color.gray);
-		Calendar p2=new Calendar();
-		p2.setSize(370,200);
-		p2.setLocation(120,200);
-		p2.setBackground(Color.gray);
-		Date p3=new Date();
-		p3.setLocation(600,200);
-		p3.setBackground(Color.gray);
-		add(p1);add(p2);add(p3);
+		add(new Page1(),BorderLayout.CENTER);
+		getMenu();
 		setSize(1000,700);setVisible(true);
+	}
+	private void getMenu()
+	{
+		JMenuBar bar=new JMenuBar();
+		JMenu menu=new JMenu("µÚ·Î");
+		menu.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+	
+			}
+		});
+		bar.add(menu);
+		setJMenuBar(bar);
+	}
+	private class Page1 extends Panel
+	{
+		Page1()
+		{
+			setLayout(null);
+			setBackground(Color.gray);
+			
+			Title p1=new Title();
+			p1.setBounds(150,50,650,110);
+			
+			Calendar p2=new Calendar();
+			p2.setBounds(100,200,470,250);
+			Date p3=new Date();
+			p3.setLocation(600,200);
+			p3.setBackground(Color.white);
+			add(p1);add(p2);add(p3);
+			setSize(1000,700);
+		}
 	}
 	private class Title extends Panel
 	{
@@ -45,107 +64,97 @@ public class Parking_1 extends JFrame{
 	{
 		Calendar()
 		{
-			GridLayout gl=new GridLayout(6,7);
+			GridLayout gl=new GridLayout(5,7);
 			setLayout(gl);
-			JLabel la=new JLabel(" Jan");la.setFont(new Font("Verdana",Font.PLAIN,20));
+			JLabel la=new JLabel(" Jan");la.setFont(new Font("Verdana",Font.PLAIN,24));
 			add(la);
-			for(int i=0;i<3;i++)add(new JLabel(""));
-			for(int i=0;i<5;i++)add(new JLabel(""));
-			b=new JButton[31];
+			add(new JLabel(""));
+			calendarbutton=new JButton[31];
 			for(int i=0;i<31;i++)
 			{
-				b[i]=new JButton((i+1)+"");
-				b[i].setBackground(Color.white);
-				b[i].addActionListener(new event());
-				add(b[i]);
+				calendarbutton[i]=new JButton((i+1)+"");
+				calendarbutton[i].setBackground(Color.white);
+				calendarbutton[i].addActionListener(new event());
+				add(calendarbutton[i]);
 			}
-			for(int i=0;i<2;i++)add(new JLabel(""));
 		}
 	} 
 	private class event implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			s=(JButton)e.getSource();
-			for(int i=0;i<31;i++)b[i].setBackground(Color.white);
-			s.setBackground(Color.green);
+			getdate=(JButton)e.getSource();
+			for(int i=0;i<31;i++)calendarbutton[i].setBackground(Color.white);
+			getdate.setBackground(Color.green);
 		}
 	}
 	private class Date extends Panel
 	{
 		Date()
 		{
+			
 			setLayout(null);
-			dateC=new JComboBox[2];
-			dateS= new String[12];
-			for(int i=0;i<dateS.length;i++)dateS[i]=new String((i+9)+":00");
-			timeS=new String[6];
-			for(int i=0;i<timeS.length;i++)timeS[i]=new String((i+1)+"hours");
-			dateC[0]=new JComboBox<String>(dateS);
-			dateC[1]=new JComboBox<String>(timeS);
-			dateC[0].setLocation(20,30);
-			dateC[1].setLocation(20,100);
-			dateC[0].addActionListener(new event_2());
-			dateC[1].addActionListener(new event_3());
+			JComboBox<String>timeCombo[]=new JComboBox[2];
+			
+			String timeArr[]= new String[12];
+			for(int i=0;i<timeArr.length;i++)timeArr[i]=new String((i+9)+":00");
+			String hourArr[]=new String[6];
+			for(int i=0;i<hourArr.length;i++)hourArr[i]=new String((i+1)+"hours");
+			
+			timeCombo[0]=new JComboBox<String>(timeArr);
+			timeCombo[1]=new JComboBox<String>(hourArr);
+			
+			timeCombo[0].setLocation(20,30);
+			timeCombo[1].setLocation(20,100);
+			
+			timeCombo[0].addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent e) {
+					
+					index1=((JComboBox<String>)e.getSource()).getSelectedIndex();	
+				}
+			});
+			timeCombo[1].addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent e) {
+
+					index2=((JComboBox<String>)e.getSource()).getSelectedIndex();	
+				}
+			});
 			for(int i=0;i<2;i++)
 			{
-				dateC[i].setSize(200,30);
-				dateC[i].setOpaque(true);
-				
-				add(dateC[i]);
+				timeCombo[i].setSize(200,30);
+				timeCombo[i].setOpaque(true);
+				add(timeCombo[i]);
 			}
-			JButton b1=new JButton("ADD");
-			b1.setLocation(130,200);
-			b1.setOpaque(true);
-			b1.setSize(90,30);
-			JButton b2=new JButton("CANCEL");
-			b2.setLocation(20,200);
-			b2.setOpaque(true);
-			b2.setSize(90,30);
-			b1.addActionListener(new event_1());
-			b2.addActionListener(new event_4());
-			add(b1);add(b2);
+			JButton add=new JButton("ADD");
+			add.setLocation(130,200);
+			add.setSize(90,30);
+			add.addActionListener(new goPage2());
+			add(add);
+			
+			JButton cancel=new JButton("CANCEL");
+			cancel.setLocation(20,200);
+			cancel.setSize(90,30);
+			cancel.addActionListener(new goPage3());
+			add(cancel);
 			setSize(250,300);
 		}
 	}
-	private class event_1 implements ActionListener
+	private class goPage2 implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e) 
 		{
-			if(s.getText().isEmpty());
-			else 
-			{	
-				int x=Integer.parseInt(s.getText().toString());
-				new Parking_2(x,index1,index2);
-				System.out.println(x+""+index1+""+index2);
-			}
+			int x=Integer.parseInt(getdate.getText().toString());
+			new Parking_2(x,index1,index2);
+			System.out.println(x+""+index1+""+index2);
 		}
 	}
-	private class event_4 implements ActionListener
+	private class goPage3 implements ActionListener
 	{
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+		public void actionPerformed(ActionEvent e) 
+		{
 			new Parking_3();
 		}
 		
-	}
-	private class event_2 implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e) 
-		{
-			// TODO Auto-generated method stub
-
-			combo1=(JComboBox<String>)e.getSource();
-			index1=combo1.getSelectedIndex();		
-		}
-	}
-	private class event_3 implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e) 
-		{
-			// TODO Auto-generated method stub
-			combo2=(JComboBox<String>)e.getSource();
-			index2=combo2.getSelectedIndex();		
-		}
 	}
 }

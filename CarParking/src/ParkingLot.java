@@ -13,9 +13,32 @@ public class ParkingLot
 			}
 		}
 	}
-	ParkingLot(int a1,int a2,int a3,int a4)
+	void setSlot(int a1,int a2,int a3,int a4)
 	{
 		for(int i=0;i<a3+1;i++)parking[a1][a2][a4]=false;
 	}
-
+	String[][][] getSlot(int a1,int a2,int a3,int a4)
+	{
+		return;
+	}
+}
+class Customer extends ParkingLot
+{
+	private int a1,a2,a3,a4;
+	public Customer(int a1,int a2,int a3,int a4,String a5[]) 
+	{
+		this.a1=a1;
+		this.a2=a2;
+		this.a3=a3;
+		this.a4=a4;
+	}
+	void setParking()
+	{
+		ParkingLot instance=new ParkingLot();
+		instance.setSlot(a1,a2,a3,a4);
+	}
+	String [] getId(int a1,int a2,int a3)
+	{
+		return;
+	}
 }

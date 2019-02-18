@@ -5,22 +5,44 @@ public class Parking_2 extends JFrame
 {
 	private JButton s;
 	private JButton slot[][];
-	private int c1,c2,c3;
+	private int calendar,time,hour;
 	public Parking_2(int a1,int a2,int a3) 
 	{
-		c1=a1;
-		c2=a2;
-		c3=a3;
+		calendar=a1;
+		time=a2;
+		hour=a3;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setContentPane(new Container());
-		setLayout(null);
-		Parking p1=new Parking();
-		p1.setLocation(50,50);
-		Schedule p2=new Schedule();
-		p2.setLocation(760,50);
-		p2.setSize(180,500);
-		add(p1);add(p2);
+		add(new Page2(),BorderLayout.CENTER);
+		getMenu();
 		setSize(1000,700);setVisible(true);
+	}
+	private void getMenu()
+	{
+		JMenuBar bar=new JMenuBar();
+		JMenu menu=new JMenu("µÚ·Î");
+		menu.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+	
+			}
+		});
+		bar.add(menu);
+		setJMenuBar(bar);
+	}
+	private class Page2 extends Panel
+	{
+		Page2()
+		{
+			setLayout(null);
+			Parking p1=new Parking();
+			p1.setLocation(50,50);
+			Schedule p2=new Schedule();
+			p2.setLocation(760,50);
+			p2.setSize(180,500);
+			add(p1);add(p2);
+			setSize(1000,700);
+		}
 	}
 	private class Parking extends Panel
 	{
@@ -94,18 +116,16 @@ public class Parking_2 extends JFrame
 	private class event_2 implements ActionListener
 	{
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			int p;
+		public void actionPerformed(ActionEvent e) 
+		{
 			for(int i=0;i<3;i++)
 			{	for(int j=0;j<5;j++)
 				{
 					int x=i*5+j+1;
 					if(s.getText().equals("S"+x))
 					{
-						p=x;
-						new Parking_3(p,c1,c2,c3);
-						System.out.println(p);
+						new Parking_3(calendar,time,hour,x);
+						System.out.println(x);
 					}		
 				}
 			}	
