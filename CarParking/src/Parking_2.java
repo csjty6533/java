@@ -1,25 +1,31 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.Graphics; 
+import java.awt.Image; 
+import java.awt.Toolkit; 
 public class Parking_2 extends JFrame
 {
 	private JButton s;
-	private JButton slot[][];
+	private JButton slot[];
 	private int calendar,time,hour;
-	public Parking_2(int a1,int a2,int a3) 
+	private ParkingLot instance;
+	private boolean parking[][][];
+	
+	public Parking_2(int a1,int a2,int a3,ParkingLot a4) 
 	{
 		calendar=a1;
 		time=a2;
 		hour=a3;
+		instance =a4;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(new Page2(),BorderLayout.CENTER);
-		getMenu();
 		setSize(1000,700);setVisible(true);
 	}
 	private void getMenu()
 	{
 		JMenuBar bar=new JMenuBar();
-		JMenu menu=new JMenu("�ڷ�");
+		JMenu menu=new JMenu("뒤로가기");
 		menu.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -35,39 +41,61 @@ public class Parking_2 extends JFrame
 		Page2()
 		{
 			setLayout(null);
+			
 			Parking p1=new Parking();
 			p1.setLocation(50,50);
+			
 			Schedule p2=new Schedule();
 			p2.setLocation(760,50);
 			p2.setSize(180,500);
+			
 			add(p1);add(p2);
 			setSize(1000,700);
 		}
 	}
-	private class Parking extends Panel
+	private class Parking extends JPanel
 	{
 		Parking()
 		{
+			parking=instance.getSlot();
 			setLayout(null);
-			setBackground(Color.gray);
-			slot=new JButton[3][5];
+			slot=new JButton[15];
 		
 			for(int i=0;i<slot.length;i++)
 			{
-				for(int j=0;j<slot[i].length;j++)
+				slot[i]=new JButton("S"+(i+1));
+				slot[i].setOpaque(true);
+				
+				slot[i].addActionListener(new event_1());
+				add(slot[i]);
+			}
+			for(int i=0;i<9;i++)slot[i].setBounds(12+i*71,40,60,110);
+			
+			for(int i=9;i<12;i++)slot[i].setBounds(500,260+(i-9)*71,110,60);
+
+			for(int i=12;i<15;i++)slot[i].setBounds(35,400-(i-12)*71,110,60);	
+			
+			for(int j=0;j<parking[0].length;j++)
 				{
-					int x=i*5+j+1;
-					slot[i][j]=new JButton("S"+x);
-					slot[i][j].setLocation(50+j*120,50+i*140);
-					slot[i][j].setSize(90,30);
-					slot[i][j].setOpaque(true);
-					slot[i][j].setBackground(Color.white);
-					slot[i][j].addActionListener(new event_1());
-					add(slot[i][j]);
+					for(int k=time;k<hour+1;k++)
+					{
+						if(parking[calendar-1][j][k])slot[j].setBackground(Color.white);
+						else 
+						{
+							slot[j].setBackground(Color.red);
+							break;
+						}
+					}
 				}
-			}	
+			setOpaque(false);
 			setSize(680,500);
 		}
+		public void paintComponent(Graphics g) 
+		{ 
+		    Toolkit tk = Toolkit.getDefaultToolkit(); 
+		    Image img = tk.getImage("img/parking.png"); 
+		    g.drawImage(img, 0, 0,650,480, this); 
+		 } 
 	}
 	private class event_1 implements ActionListener
 	{
@@ -75,16 +103,24 @@ public class Parking_2 extends JFrame
 			// TODO Auto-generated method stub
 			
 			s=(JButton)e.getSource();
-			for(int i=0;i<3;i++)
+			for(int j=0;j<parking[0].length;j++)
 			{
-				for(int j=0;j<5;j++)
+				for(int k=time;k<hour+1;k++)
 				{
-					slot[i][j].setBackground(Color.white);
-					int x=i*5+j+1;
-					if(s.getText().equals("S"+x))
+					if(parking[calendar-1][j][k])slot[j].setBackground(Color.white);
+					else 
 					{
-						s.setBackground(Color.green);
-					}		
+						slot[j].setBackground(Color.red);
+						break;
+					}
+				}
+			}
+			for(int j=0;j<slot.length;j++)
+			{
+				for(int k=time;k<hour+1;k++)
+				
+				{
+					if(s.getText().equals("S"+(j+1))&&parking[calendar-1][j][k])s.setBackground(Color.green);	
 				}
 			}
 		}	
@@ -124,7 +160,7 @@ public class Parking_2 extends JFrame
 					int x=i*5+j+1;
 					if(s.getText().equals("S"+x))
 					{
-						new Parking_3(calendar,time,hour,x);
+						new Parking_3(calendar,time,hour,x,instance);
 						System.out.println(x);
 					}		
 				}

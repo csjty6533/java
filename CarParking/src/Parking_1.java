@@ -5,31 +5,30 @@ public class Parking_1 extends JFrame{
 	private JButton calendarbutton[];
 	private JButton getdate;
 	private int index1,index2;
+	private JLabel error;
+	private ParkingLot instance;
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new Parking_1();
+		ParkingLot p=new ParkingLot();
+		new Parking_1(p);
 	}
-	public Parking_1()
+	public Parking_1(ParkingLot a1)
 	{
+		instance=a1;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setContentPane(new Container());
-		add(new Page1(),BorderLayout.CENTER);
 		getMenu();
+		add(new Page1());
 		setSize(1000,700);setVisible(true);
 	}
 	private void getMenu()
 	{
-		JMenuBar bar=new JMenuBar();
-		JMenu menu=new JMenu("뒤로");
-		menu.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				
-	
-			}
-		});
-		bar.add(menu);
-		setJMenuBar(bar);
+		JMenuBar mb=new JMenuBar();
+		JMenu menu1=new JMenu("menu1");
+		JMenuItem item1=new JMenuItem("item1");
+		JMenuItem item2=new JMenuItem("item2");
+		menu1.add(item1);menu1.add(item2);
+		mb.add(menu1);
+		
+		setJMenuBar(mb);
 	}
 	private class Page1 extends Panel
 	{
@@ -43,9 +42,11 @@ public class Parking_1 extends JFrame{
 			
 			Calendar p2=new Calendar();
 			p2.setBounds(100,200,470,250);
+			
 			Date p3=new Date();
 			p3.setLocation(600,200);
 			p3.setBackground(Color.white);
+			
 			add(p1);add(p2);add(p3);
 			setSize(1000,700);
 		}
@@ -64,11 +65,12 @@ public class Parking_1 extends JFrame{
 	{
 		Calendar()
 		{
-			GridLayout gl=new GridLayout(5,7);
+			GridLayout gl=new GridLayout(6,7);
 			setLayout(gl);
-			JLabel la=new JLabel(" Jan");la.setFont(new Font("Verdana",Font.PLAIN,24));
+			JLabel la=new JLabel(" Jan");la.setFont(new Font("Verdana",Font.PLAIN,20));
 			add(la);
-			add(new JLabel(""));
+			for(int i=0;i<3;i++)add(new JLabel(""));
+			for(int i=0;i<5;i++)add(new JLabel(""));
 			calendarbutton=new JButton[31];
 			for(int i=0;i<31;i++)
 			{
@@ -77,11 +79,13 @@ public class Parking_1 extends JFrame{
 				calendarbutton[i].addActionListener(new event());
 				add(calendarbutton[i]);
 			}
+			for(int i=0;i<2;i++)add(new JLabel(""));
 		}
 	} 
 	private class event implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
 			getdate=(JButton)e.getSource();
 			for(int i=0;i<31;i++)calendarbutton[i].setBackground(Color.white);
 			getdate.setBackground(Color.green);
@@ -137,6 +141,14 @@ public class Parking_1 extends JFrame{
 			cancel.setSize(90,30);
 			cancel.addActionListener(new goPage3());
 			add(cancel);
+			
+			error=new JLabel("9:00~21:00중 선택");
+			error.setForeground(Color.red);
+			error.setSize(110,20);
+			error.setLocation(20,250);
+			error.setOpaque(true);
+			error.setVisible(false);
+			add(error);
 			setSize(250,300);
 		}
 	}
@@ -144,10 +156,14 @@ public class Parking_1 extends JFrame{
 	{
 		public void actionPerformed(ActionEvent e) 
 		{
-			int x=Integer.parseInt(getdate.getText().toString());
-			new Parking_2(x,index1,index2);
-			System.out.println(x+""+index1+""+index2);
-		}
+			if(index1+index2>12)error.setVisible(true);
+			else
+			{
+				int x=Integer.parseInt(getdate.getText().toString());
+				new Parking_2(x,index1,index2,instance);
+				System.out.println(x+""+index1+""+index2);
+			}
+		}	
 	}
 	private class goPage3 implements ActionListener
 	{
@@ -155,6 +171,5 @@ public class Parking_1 extends JFrame{
 		{
 			new Parking_3();
 		}
-		
 	}
 }

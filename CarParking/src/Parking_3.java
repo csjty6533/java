@@ -3,58 +3,33 @@ import java.awt.*;
 import java.awt.event.*;
 public class Parking_3 extends JFrame
 {
+	private int c1,c2,c3,c4;
 	private JTextField text[];
-	private String dataArr[];
-	private int calendar,time,hour,slot;
+	private ParkingLot instance;
 	Parking_3()
 	{
 		
 	}
-	Parking_3(int a1,int a2,int a3,int a4)
+	Parking_3(int a1,int a2,int a3,int a4,ParkingLot a5)
 	{
-		calendar=a1;
-		time=a2;
-		hour=a3;
-		slot=a4;
+		c1=a1;
+		c2=a2;
+		c3=a3;
+		c4=a4;
+		instance=a5;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(new Container());
+		setLayout(null);
+		Title p1=new Title();
+		p1.setLocation(200,80);
+		p1.setSize(560,50);
+		Data p2=new Data();
+		p2.setLocation(220,160);
+		Submit p3=new Submit();
+		p3.setLocation(420,500);
+		add(p1);add(p2);add(p3);
 		setBackground(Color.gray);
-		getMenu();
-		add(new Page3(),BorderLayout.CENTER);
 		setSize(1000,700);setVisible(true);
-	}
-	private void getMenu()
-	{
-		JMenuBar bar=new JMenuBar();
-		JMenu menu=new JMenu("µÚ·Î");
-		menu.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				
-	
-			}
-		});
-		bar.add(menu);
-		setJMenuBar(bar);
-	}
-	private class Page3 extends Panel
-	{
-		Page3()
-		{
-			setLayout(null);
-			
-			Title p1=new Title();
-			p1.setBounds(140,70,700,90);
-			
-			Data p2=new Data();
-			p2.setBounds(150,160,650,240);
-			
-			Submit p3=new Submit();
-			p3.setBounds(300,500,385,540);
-			
-			add(p1);add(p2);add(p3);
-			setSize(1000,700);
-		}
 	}
 	private class Title extends Panel
 	{
@@ -73,22 +48,23 @@ public class Parking_3 extends JFrame
 			GridLayout gl=new GridLayout(3,4);
 			gl.setVgap(80);gl.setHgap(10);
 			setLayout(gl);
-			
-			JLabel id[]=new JLabel[6];
-			String idArr[]= {"Name","Tel-1","Identify-number","Tel-2","Adress","E-mail"};
-			for(int i=0;i<id.length;i++) 
-			{
-				id[i]=new JLabel(idArr[i]);
-				id[i].setFont(new Font("Arial",Font.PLAIN,18));
-				add(id[i]);
-			}
-			
+			JLabel la[]=new JLabel[6];
+			la[0]=new JLabel("Name");
+			la[1]=new JLabel("Tel-1");
+			la[2]=new JLabel("Identify-number");
+			la[3]=new JLabel("Tel-2");
+			la[4]=new JLabel("Address");
+			la[5]=new JLabel("E-mail");
 			text=new JTextField[6];
-			for(int i=0;i<text.length;i++)
+			for(int i=0;i<la.length;i++)
 			{
+				la[i].setFont(new Font("Arial",Font.PLAIN,18));
+
+				add(la[i]);
 				text[i]=new JTextField(15);
 				add(text[i]);
 			}
+			setSize(500,300);
 		}
 	}
 	private class Submit extends Panel
@@ -98,6 +74,7 @@ public class Parking_3 extends JFrame
 			setLayout(new FlowLayout());
 			JButton b=new JButton("submit");
 			b.addActionListener(new event());
+			setSize(85,40);
 			add(b);
 		}
 	}
@@ -105,11 +82,15 @@ public class Parking_3 extends JFrame
 	{
 		public void actionPerformed(ActionEvent e) 
 		{
+			// TODO Auto-generated method stub
+			String arr[]=new String[6];
 			for(int i=0;i<text.length;i++)
 			{
-				dataArr[i]=text[i].getText();
+				arr[i]=new String(text[i].getText());
 			}
-			ParkingLot instance=new Customer(calendar,time,hour,slot,dataArr); 
+			instance.setSlot(c1, c2, c3, c4);
+			instance.setId(c1,c2,c3,c4,arr);
+			new Parking_1(instance);
 		}
 		
 	}
