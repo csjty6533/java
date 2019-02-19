@@ -15,20 +15,8 @@ public class Parking_1 extends JFrame{
 	{
 		instance=a1;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getMenu();
 		add(new Page1());
 		setSize(1000,700);setVisible(true);
-	}
-	private void getMenu()
-	{
-		JMenuBar mb=new JMenuBar();
-		JMenu menu1=new JMenu("menu1");
-		JMenuItem item1=new JMenuItem("item1");
-		JMenuItem item2=new JMenuItem("item2");
-		menu1.add(item1);menu1.add(item2);
-		mb.add(menu1);
-		
-		setJMenuBar(mb);
 	}
 	private class Page1 extends Panel
 	{
@@ -169,7 +157,7 @@ public class Parking_1 extends JFrame{
 	{
 		public void actionPerformed(ActionEvent e) 
 		{
-			new Parking_3();
+			new Parking_3(instance);
 		}
 	}
 }

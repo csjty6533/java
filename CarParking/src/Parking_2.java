@@ -8,33 +8,24 @@ public class Parking_2 extends JFrame
 {
 	private JButton s;
 	private JButton slot[];
-	private int calendar,time,hour;
+	private int calendar,startT,endT;
 	private ParkingLot instance;
 	private boolean parking[][][];
-	
-	public Parking_2(int a1,int a2,int a3,ParkingLot a4) 
+	Parking_2(int a1,int a2,int a3,ParkingLot a4,int a5) 
 	{
-		calendar=a1;
-		time=a2;
-		hour=a3;
-		instance =a4;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(new Page2(),BorderLayout.CENTER);
 		setSize(1000,700);setVisible(true);
 	}
-	private void getMenu()
+	public Parking_2(int a1,int a2,int a3,ParkingLot a4) 
 	{
-		JMenuBar bar=new JMenuBar();
-		JMenu menu=new JMenu("뒤로가기");
-		menu.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				
-	
-			}
-		});
-		bar.add(menu);
-		setJMenuBar(bar);
+		calendar=a1;
+		startT=a2;
+		endT=a3;
+		instance =a4;
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		add(new Page2(),BorderLayout.CENTER);
+		setSize(1000,700);setVisible(true);
 	}
 	private class Page2 extends Panel
 	{
@@ -77,12 +68,14 @@ public class Parking_2 extends JFrame
 			
 			for(int j=0;j<parking[0].length;j++)
 				{
-					for(int k=time;k<hour+1;k++)
+					for(int k=startT;k<startT+endT+1;k++)
 					{
 						if(parking[calendar-1][j][k])slot[j].setBackground(Color.white);
+							
 						else 
 						{
 							slot[j].setBackground(Color.red);
+							slot[j].setEnabled(false);
 							break;
 						}
 					}
@@ -105,20 +98,15 @@ public class Parking_2 extends JFrame
 			s=(JButton)e.getSource();
 			for(int j=0;j<parking[0].length;j++)
 			{
-				for(int k=time;k<hour+1;k++)
+				for(int k=startT;k<startT+endT+1;k++)
 				{
 					if(parking[calendar-1][j][k])slot[j].setBackground(Color.white);
-					else 
-					{
-						slot[j].setBackground(Color.red);
-						break;
-					}
+					else break;
 				}
 			}
 			for(int j=0;j<slot.length;j++)
 			{
-				for(int k=time;k<hour+1;k++)
-				
+				for(int k=startT;k<startT+endT+1;k++)	
 				{
 					if(s.getText().equals("S"+(j+1))&&parking[calendar-1][j][k])s.setBackground(Color.green);	
 				}
@@ -134,6 +122,7 @@ public class Parking_2 extends JFrame
 			setBackground(Color.gray);
 			JLabel title=new JLabel("time schedule");
 			title.setFont(new Font("Arial",Font.PLAIN,20));
+			title.setForeground(Color.white);
 			add(title);
 			JLabel time[]=new JLabel[20];
 			for(int i=0;i<time.length;i++)
@@ -154,17 +143,15 @@ public class Parking_2 extends JFrame
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-			for(int i=0;i<3;i++)
-			{	for(int j=0;j<5;j++)
-				{
-					int x=i*5+j+1;
-					if(s.getText().equals("S"+x))
+			for(int j=0;j<slot.length;j++)
+			{	
+				if(s.getText().equals("S"+(j+1)))
 					{
-						new Parking_3(calendar,time,hour,x,instance);
-						System.out.println(x);
+					new Parking_3(calendar,startT,endT,j,instance);
+						System.out.println(j);
 					}		
-				}
-			}	
+				
+			}
 		}
 	}	
 }

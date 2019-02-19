@@ -3,33 +3,50 @@ import java.awt.*;
 import java.awt.event.*;
 public class Parking_3 extends JFrame
 {
-	private int c1,c2,c3,c4;
+	private int calendar,startT,endT,slot;
 	private JTextField text[];
 	private ParkingLot instance;
-	Parking_3()
+	private int key;
+	Parking_3(ParkingLot a1)
 	{
-		
+		instance=a1;
+		key=1;
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setContentPane(new Page3());
+		setSize(1000,700);setVisible(true);
 	}
 	Parking_3(int a1,int a2,int a3,int a4,ParkingLot a5)
 	{
-		c1=a1;
-		c2=a2;
-		c3=a3;
-		c4=a4;
+		key=0;
+		calendar=a1;
+		startT=a2;
+		endT=a3;
+		slot=a4;
 		instance=a5;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setContentPane(new Container());
-		setLayout(null);
-		Title p1=new Title();
-		p1.setLocation(200,80);
-		p1.setSize(560,50);
-		Data p2=new Data();
-		p2.setLocation(220,160);
-		Submit p3=new Submit();
-		p3.setLocation(420,500);
-		add(p1);add(p2);add(p3);
-		setBackground(Color.gray);
+		setContentPane(new Page3());
+		
 		setSize(1000,700);setVisible(true);
+	}
+	private class Page3 extends Panel
+	{
+		Page3()
+		{
+			setLayout(null);
+			Title p1=new Title();
+			p1.setLocation(200,80);
+			p1.setSize(560,50);
+			
+			Data p2=new Data();
+			p2.setLocation(220,160);
+			
+			Submit p3=new Submit();
+			p3.setLocation(420,500);
+			
+			add(p1);add(p2);add(p3);
+			setBackground(Color.gray);
+			setSize(1000,700);
+		}
 	}
 	private class Title extends Panel
 	{
@@ -88,9 +105,14 @@ public class Parking_3 extends JFrame
 			{
 				arr[i]=new String(text[i].getText());
 			}
-			instance.setSlot(c1, c2, c3, c4);
-			instance.setId(c1,c2,c3,c4,arr);
-			new Parking_1(instance);
+			if(key==0)
+			{	
+				instance.setSlot(calendar,startT,endT,slot,arr);
+				new Parking_1(instance);
+			}
+			else new Parking_2(instance.getCancel(arr)[0],
+							instance.getCancel(arr)[1],
+							instance.getCancel(arr)[2],instance,1);
 		}
 		
 	}
