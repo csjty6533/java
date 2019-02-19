@@ -15,7 +15,7 @@ public class Parking_2 extends JFrame
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(new Page2(),BorderLayout.CENTER);
-		setSize(1000,700);setVisible(true);
+		setSize(800,600);setVisible(true);
 	}
 	public Parking_2(int a1,int a2,int a3,ParkingLot a4) 
 	{
@@ -24,8 +24,8 @@ public class Parking_2 extends JFrame
 		endT=a3;
 		instance =a4;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		add(new Page2(),BorderLayout.CENTER);
-		setSize(1000,700);setVisible(true);
+		add(new Page2());
+		setSize(800,600);setVisible(true);
 	}
 	private class Page2 extends Panel
 	{
@@ -34,14 +34,15 @@ public class Parking_2 extends JFrame
 			setLayout(null);
 			
 			Parking p1=new Parking();
-			p1.setLocation(50,50);
+			p1.setLocation(40,30);
 			
-			Schedule p2=new Schedule();
-			p2.setLocation(760,50);
-			p2.setSize(180,500);
+			JButton b=new JButton("click");
+			b.setFont(new Font("Arial",Font.PLAIN,18));
+			b.setBounds(695,470,70,40);
+			b.addActionListener(new event_2());
 			
-			add(p1);add(p2);
-			setSize(1000,700);
+			add(p1);add(b);
+			setSize(800,600);
 		}
 	}
 	private class Parking extends JPanel
@@ -113,31 +114,6 @@ public class Parking_2 extends JFrame
 			}
 		}	
 	}
-	private class Schedule extends Panel
-	{
-		Schedule()
-		{
-			GridLayout gl=new GridLayout(22,1);
-			setLayout(gl);
-			setBackground(Color.gray);
-			JLabel title=new JLabel("time schedule");
-			title.setFont(new Font("Arial",Font.PLAIN,20));
-			title.setForeground(Color.white);
-			add(title);
-			JLabel time[]=new JLabel[20];
-			for(int i=0;i<time.length;i++)
-			{
-				time[i]=new JLabel("");
-				time[i].setFont(new Font("Arial",Font.PLAIN,20));
-				add(time[i]);
-			}
-			JButton b=new JButton("click");
-			b.setFont(new Font("Arial",Font.PLAIN,20));
-			
-			b.addActionListener(new event_2());
-			add(b);
-		}
-	}
 	private class event_2 implements ActionListener
 	{
 		@Override
@@ -146,11 +122,11 @@ public class Parking_2 extends JFrame
 			for(int j=0;j<slot.length;j++)
 			{	
 				if(s.getText().equals("S"+(j+1)))
-					{
+				{
 					new Parking_3(calendar,startT,endT,j,instance);
-						System.out.println(j);
-					}		
-				
+					System.out.println(j);
+				}		
+			
 			}
 		}
 	}	

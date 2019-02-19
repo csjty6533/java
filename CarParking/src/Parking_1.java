@@ -16,7 +16,7 @@ public class Parking_1 extends JFrame{
 		instance=a1;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(new Page1());
-		setSize(1000,700);setVisible(true);
+		setSize(800,600);setVisible(true);
 	}
 	private class Page1 extends Panel
 	{
@@ -26,17 +26,17 @@ public class Parking_1 extends JFrame{
 			setBackground(Color.gray);
 			
 			Title p1=new Title();
-			p1.setBounds(150,50,650,110);
+			p1.setBounds(100,30,650,110);
 			
 			Calendar p2=new Calendar();
-			p2.setBounds(100,200,470,250);
+			p2.setBounds(30,170,340,250);
 			
 			Date p3=new Date();
-			p3.setLocation(600,200);
+			p3.setLocation(400,170);
 			p3.setBackground(Color.white);
 			
 			add(p1);add(p2);add(p3);
-			setSize(1000,700);
+			setSize(800,600);
 		}
 	}
 	private class Title extends Panel
@@ -55,6 +55,7 @@ public class Parking_1 extends JFrame{
 		{
 			GridLayout gl=new GridLayout(6,7);
 			setLayout(gl);
+			
 			JLabel la=new JLabel(" Jan");la.setFont(new Font("Verdana",Font.PLAIN,20));
 			add(la);
 			for(int i=0;i<3;i++)add(new JLabel(""));
@@ -118,6 +119,7 @@ public class Parking_1 extends JFrame{
 				timeCombo[i].setOpaque(true);
 				add(timeCombo[i]);
 			}
+			
 			JButton add=new JButton("ADD");
 			add.setLocation(130,200);
 			add.setSize(90,30);
@@ -149,7 +151,7 @@ public class Parking_1 extends JFrame{
 			{
 				int x=Integer.parseInt(getdate.getText().toString());
 				new Parking_2(x,index1,index2,instance);
-				System.out.println(x+""+index1+""+index2);
+				System.out.println(x+" "+index1+" "+index2);
 			}
 		}	
 	}

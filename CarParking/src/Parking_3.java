@@ -13,7 +13,7 @@ public class Parking_3 extends JFrame
 		key=1;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(new Page3());
-		setSize(1000,700);setVisible(true);
+		setSize(800,600);setVisible(true);
 	}
 	Parking_3(int a1,int a2,int a3,int a4,ParkingLot a5)
 	{
@@ -26,7 +26,7 @@ public class Parking_3 extends JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(new Page3());
 		
-		setSize(1000,700);setVisible(true);
+		setSize(800,600);setVisible(true);
 	}
 	private class Page3 extends Panel
 	{
@@ -34,14 +34,13 @@ public class Parking_3 extends JFrame
 		{
 			setLayout(null);
 			Title p1=new Title();
-			p1.setLocation(200,80);
-			p1.setSize(560,50);
+			p1.setBounds(150,30,500,50);
 			
 			Data p2=new Data();
-			p2.setLocation(220,160);
+			p2.setBounds(120,130,500,300);
 			
 			Submit p3=new Submit();
-			p3.setLocation(420,500);
+			p3.setBounds(370,480,85,40);
 			
 			add(p1);add(p2);add(p3);
 			setBackground(Color.gray);
@@ -68,20 +67,20 @@ public class Parking_3 extends JFrame
 			JLabel la[]=new JLabel[6];
 			la[0]=new JLabel("Name");
 			la[1]=new JLabel("Tel-1");
-			la[2]=new JLabel("Identify-number");
+			la[2]=new JLabel("Identify-N");
 			la[3]=new JLabel("Tel-2");
 			la[4]=new JLabel("Address");
 			la[5]=new JLabel("E-mail");
 			text=new JTextField[6];
 			for(int i=0;i<la.length;i++)
 			{
-				la[i].setFont(new Font("Arial",Font.PLAIN,18));
-
+				la[i].setFont(new Font("Verdana",Font.PLAIN,18));
+				la[i].setHorizontalAlignment(Label.RIGHT);
 				add(la[i]);
 				text[i]=new JTextField(15);
 				add(text[i]);
 			}
-			setSize(500,300);
+			
 		}
 	}
 	private class Submit extends Panel
@@ -91,7 +90,6 @@ public class Parking_3 extends JFrame
 			setLayout(new FlowLayout());
 			JButton b=new JButton("submit");
 			b.addActionListener(new event());
-			setSize(85,40);
 			add(b);
 		}
 	}
