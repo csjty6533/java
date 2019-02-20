@@ -27,13 +27,13 @@ public class Parking_1 extends JFrame{
 			setBackground(Color.gray);
 			
 			Title p1=new Title();
-			p1.setBounds(100,30,650,110);
+			p1.setBounds(55,50,650,110);
 			
 			Calendar p2=new Calendar();
-			p2.setBounds(30,170,340,250);
+			p2.setBounds(80,170,340,250);
 			
 			Date p3=new Date();
-			p3.setLocation(400,170);
+			p3.setLocation(450,170);
 			p3.setBackground(Color.white);
 			
 			add(p1);add(p2);add(p3);
@@ -69,10 +69,8 @@ public class Parking_1 extends JFrame{
 				calendarbutton[i].setBackground(Color.white);
 				calendarbutton[i].addActionListener(new ActionListener() 
 				{
-					
 					public void actionPerformed(ActionEvent e) 
 					{
-						
 						getdate=(JButton)e.getSource();
 						for(int i=0;i<31;i++)calendarbutton[i].setBackground(Color.white);
 						getdate.setBackground(Color.green);

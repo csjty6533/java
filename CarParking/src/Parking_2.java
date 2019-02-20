@@ -54,7 +54,13 @@ public class Parking_2 extends JFrame
 			b.setBounds(695,470,70,40);
 			b.addActionListener(new goPage3());
 			
-			add(p1);add(b);
+			JLabel time=new JLabel("2019-1-"+calendar+" "+(startT+9)+":00 ~ "+"2019/1/"+calendar+" "+(startT+9+endT+1)+":00");
+			time.setBounds(500,10,200,20);
+			time.setForeground(Color.white);
+			time.setBackground(Color.gray);
+			time.setOpaque(true);
+			
+			add(p1);add(b);add(time);
 			setSize(800,600);
 		}
 		//cancel
@@ -70,7 +76,13 @@ public class Parking_2 extends JFrame
 			c.setBounds(695,470,70,40);
 			c.addActionListener(new goPage1(a1));
 			
-			add(p1);add(c);
+			JLabel time=new JLabel("2019-1-"+calendar+" "+(startT+9)+":00 ~ "+"2019/1/"+calendar+" "+(startT+9+endT+1)+":00");
+			time.setBounds(500,10,200,20);
+			time.setForeground(Color.white);
+			time.setBackground(Color.gray);
+			time.setOpaque(true);
+			
+			add(p1);add(c);add(time);
 			setSize(800,600);
 		}
 	}
@@ -99,9 +111,9 @@ public class Parking_2 extends JFrame
 			}
 			for(int i=0;i<9;i++)slot[i].setBounds(12+i*71,40,60,110);
 			
-			for(int i=9;i<12;i++)slot[i].setBounds(500,260+(i-9)*71,110,60);
+			for(int i=9;i<12;i++)slot[i].setBounds(500,260+(i-9)*71,110,57);
 
-			for(int i=12;i<15;i++)slot[i].setBounds(35,400-(i-12)*71,110,60);	
+			for(int i=12;i<15;i++)slot[i].setBounds(35,400-(i-12)*71,110,57);	
 			
 			for(int j=0;j<parking[0].length;j++)
 				{
@@ -135,9 +147,9 @@ public class Parking_2 extends JFrame
 			}
 			for(int i=0;i<9;i++)slot[i].setBounds(12+i*71,40,60,110);
 			
-			for(int i=9;i<12;i++)slot[i].setBounds(500,260+(i-9)*71,110,60);
+			for(int i=9;i<12;i++)slot[i].setBounds(500,260+(i-9)*71,110,57);
 
-			for(int i=12;i<15;i++)slot[i].setBounds(35,400-(i-12)*71,110,60);	
+			for(int i=12;i<15;i++)slot[i].setBounds(35,400-(i-12)*71,110,57);	
 			
 			getslot=instance.getCancel(calendar, startT, endT, a1);
 			slot[getslot].setBackground(Color.blue);

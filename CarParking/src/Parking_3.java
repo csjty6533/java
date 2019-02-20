@@ -42,13 +42,13 @@ public class Parking_3 extends JFrame
 		{
 			setLayout(null);
 			Title p1=new Title();
-			p1.setBounds(150,30,500,50);
+			p1.setBounds(130,40,500,50);
 			
 			Data p2=new Data();
 			p2.setBounds(120,130,500,300);
 			
 			Submit p3=new Submit();
-			p3.setBounds(370,480,85,40);
+			p3.setBounds(320,480,85,50);
 			
 			add(p1);add(p2);add(p3);
 			setBackground(Color.gray);
@@ -69,7 +69,7 @@ public class Parking_3 extends JFrame
 	{
 		Data()
 		{
-			GridLayout gl=new GridLayout(3,4); gl.setVgap(80);gl.setHgap(10);
+			GridLayout gl=new GridLayout(3,4); gl.setVgap(90);gl.setHgap(20);
 			setLayout(gl);
 			
 			JLabel la[]=new JLabel[6];
