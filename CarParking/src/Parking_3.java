@@ -7,6 +7,7 @@ public class Parking_3 extends JFrame
 	private JTextField text[];
 	private ParkingLot instance;
 	private int key;
+	private String arr[];
 	Parking_3(int a1,int a2,int a3,ParkingLot a4)
 	{
 		calendar=a1;
@@ -101,7 +102,7 @@ public class Parking_3 extends JFrame
 		public void actionPerformed(ActionEvent e) 
 		{
 			// TODO Auto-generated method stub
-			String arr[]=new String[6];
+			arr=new String[6];
 			for(int i=0;i<text.length;i++)
 			{
 				arr[i]=new String(text[i].getText());
@@ -116,7 +117,10 @@ public class Parking_3 extends JFrame
 						instance.setSlot(calendar,startT,endT,slot,arr);
 						new Parking_1(instance);
 					}
-					else new Parking_2(calendar,startT,endT,instance,arr);
+					else
+					{
+						if(instance.getCancelSlot(calendar,startT,endT,arr))new Parking_2(calendar,startT,endT,instance,arr);
+					}
 				}
 			}
 		}

@@ -132,7 +132,7 @@ public class Parking_1 extends JFrame{
 			cancel.addActionListener(new goPage3());
 			add(cancel);
 			
-			error=new JLabel("9:00~21:00");
+			error=new JLabel("9:00~21:00use");
 			error.setForeground(Color.red);
 			error.setSize(130,20);
 			error.setLocation(20,250);

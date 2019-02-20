@@ -58,7 +58,7 @@ public class Parking_2 extends JFrame
 			JButton c=new JButton("OK");
 			c.setFont(new Font("Arial",Font.PLAIN,18));
 			c.setBounds(695,470,70,40);
-			c.addActionListener(new goPage1());
+			c.addActionListener(new goPage1(a1));
 			
 			add(p1);add(c);
 			setSize(800,600);
@@ -113,7 +113,6 @@ public class Parking_2 extends JFrame
 		 
 		Parking(String a1[])
 		{
-			parking=instance.getSlot();
 			setLayout(null);
 			slot=new JButton[15];
 		
@@ -178,10 +177,15 @@ public class Parking_2 extends JFrame
 	}
 	private class goPage1 implements ActionListener
 	{
-		@Override
+		private String id[];
+		goPage1(String a1[])
+		{
+			id=new String[a1.length];
+			for(int i=0;i<a1.length;i++)id[i]=a1[i];
+		}
 		public void actionPerformed(ActionEvent e) 
 		{
-			instance.setCancelSlot(calendar,startT,endT,getslot);
+			instance.setCancelSlot(calendar,startT,endT,getslot,id);
 			new Parking_1(instance);
 			System.out.println((getslot+1)+"");
 		}
