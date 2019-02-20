@@ -7,9 +7,12 @@ public class Parking_3 extends JFrame
 	private JTextField text[];
 	private ParkingLot instance;
 	private int key;
-	Parking_3(ParkingLot a1)
+	Parking_3(int a1,int a2,int a3,ParkingLot a4)
 	{
-		instance=a1;
+		calendar=a1;
+		startT=a2;
+		endT=a3;
+		instance=a4;
 		key=1;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(new Page3());
@@ -103,14 +106,19 @@ public class Parking_3 extends JFrame
 			{
 				arr[i]=new String(text[i].getText());
 			}
-			if(key==0)
-			{	
-				instance.setSlot(calendar,startT,endT,slot,arr);
-				new Parking_1(instance);
+			for(int i=0;i<arr.length;i++)
+			{
+				if(arr[i].equals(""))break;
+				else
+				{
+					if(key==0)
+					{	
+						instance.setSlot(calendar,startT,endT,slot,arr);
+						new Parking_1(instance);
+					}
+					else new Parking_2(calendar,startT,endT,instance,arr);
+				}
 			}
-			else new Parking_2(instance.getCancel(arr)[0],
-							instance.getCancel(arr)[1],
-							instance.getCancel(arr)[2],instance,1);
 		}
 		
 	}

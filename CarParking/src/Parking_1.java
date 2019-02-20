@@ -132,9 +132,9 @@ public class Parking_1 extends JFrame{
 			cancel.addActionListener(new goPage3());
 			add(cancel);
 			
-			error=new JLabel("9:00~21:00Áß ¼±ÅÃ");
+			error=new JLabel("9:00~21:00");
 			error.setForeground(Color.red);
-			error.setSize(110,20);
+			error.setSize(130,20);
 			error.setLocation(20,250);
 			error.setOpaque(true);
 			error.setVisible(false);
@@ -159,7 +159,12 @@ public class Parking_1 extends JFrame{
 	{
 		public void actionPerformed(ActionEvent e) 
 		{
-			new Parking_3(instance);
+			if(index1+index2>12)error.setVisible(true);
+			else
+			{
+				int x=Integer.parseInt(getdate.getText().toString());
+				new Parking_3(x,index1,index2,instance);
+			}
 		}
 	}
 }
