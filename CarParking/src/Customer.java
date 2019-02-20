@@ -16,13 +16,14 @@ public class Customer
 		for(int i=0;i<id.length;i++)
 		{
 			if(id[i].equals(a1[i]))
-				{
-				if(i==id.length-1)
-				{
-					key=true;
-				}
-				}
-			else key=false;
+			{
+				if(i==id.length-1)key=true;
+			}
+			else
+			{
+				key=false;
+				break;
+			}
 		}
 		return key;
 	}

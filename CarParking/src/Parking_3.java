@@ -6,30 +6,34 @@ public class Parking_3 extends JFrame
 	private int calendar,startT,endT,slot;
 	private JTextField text[];
 	private ParkingLot instance;
-	private int key;
-	private String arr[];
-	Parking_3(int a1,int a2,int a3,ParkingLot a4)
-	{
-		calendar=a1;
-		startT=a2;
-		endT=a3;
-		instance=a4;
-		key=1;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setContentPane(new Page3());
-		setSize(800,600);setVisible(true);
-	}
+	private boolean key;
+	private String id[];
+	//ADD
 	Parking_3(int a1,int a2,int a3,int a4,ParkingLot a5)
 	{
-		key=0;
+		key=true;
 		calendar=a1;
 		startT=a2;
 		endT=a3;
 		slot=a4;
 		instance=a5;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("PARKINGLOT");
 		setContentPane(new Page3());
 		
+		setSize(800,600);setVisible(true);
+	}
+	//CANCEL
+	Parking_3(int a1,int a2,int a3,ParkingLot a4)
+	{
+		calendar=a1;
+		startT=a2;
+		endT=a3;
+		instance=a4;
+		key=false;
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("PARKINGLOT");
+		setContentPane(new Page3());
 		setSize(800,600);setVisible(true);
 	}
 	private class Page3 extends Panel
@@ -65,9 +69,9 @@ public class Parking_3 extends JFrame
 	{
 		Data()
 		{
-			GridLayout gl=new GridLayout(3,4);
-			gl.setVgap(80);gl.setHgap(10);
+			GridLayout gl=new GridLayout(3,4); gl.setVgap(80);gl.setHgap(10);
 			setLayout(gl);
+			
 			JLabel la[]=new JLabel[6];
 			la[0]=new JLabel("Name");
 			la[1]=new JLabel("Tel-1");
@@ -75,6 +79,7 @@ public class Parking_3 extends JFrame
 			la[3]=new JLabel("Tel-2");
 			la[4]=new JLabel("Address");
 			la[5]=new JLabel("E-mail");
+			
 			text=new JTextField[6];
 			for(int i=0;i<la.length;i++)
 			{
@@ -101,25 +106,27 @@ public class Parking_3 extends JFrame
 	{
 		public void actionPerformed(ActionEvent e) 
 		{
-			// TODO Auto-generated method stub
-			arr=new String[6];
+			id=new String[6];
 			for(int i=0;i<text.length;i++)
 			{
-				arr[i]=new String(text[i].getText());
+				id[i]=new String(text[i].getText());
 			}
-			for(int i=0;i<arr.length;i++)
+			for(int i=0;i<id.length;i++)
 			{
-				if(arr[i].equals(""))break;
+				if(id[i].equals(""))break;
 				else
 				{
-					if(key==0)
+					//add >goParking1
+					if(key)
 					{	
-						instance.setSlot(calendar,startT,endT,slot,arr);
+						instance.setSlot(calendar,startT,endT,slot,id);
 						new Parking_1(instance);
 					}
+					//cancel >goParking2
 					else
 					{
-						if(instance.getCancelSlot(calendar,startT,endT,arr))new Parking_2(calendar,startT,endT,instance,arr);
+						int k=instance.getCancel(calendar, startT, endT, id);
+						if(instance.getCancelSlot(calendar,startT,endT,id,k))new Parking_2(calendar,startT,endT,instance,id);
 					}
 				}
 			}

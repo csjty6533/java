@@ -40,8 +40,8 @@ class ParkingLot
 		slot=a4;
 		for(int i=startT;i<startT+endT+1;i++)
 			{
-				if(customer[date][slot][i].getId(a5))
-				{
+			if(parking[date][slot][i]);
+			else{
 					parking[date][slot][i]=true;
 					customer[date][slot][i].setCancelId();
 				}
@@ -53,7 +53,7 @@ class ParkingLot
 		date=a1-1;
 		startT=a2;
 		endT=a3;
-		int sum=0;
+	
 		for(int i=0;i<parking[0].length;i++)
 		{	
 			for(int j=startT;j<startT+endT+1;j++)
@@ -61,26 +61,27 @@ class ParkingLot
 				if(parking[date][i][j]);
 				else 
 				{
-					sum++;
-					if(sum==endT)getslot=i;
+					if(customer[date][i][j].getId(a4))getslot=i;
 				}
 			}
 		}
 		return getslot;
 	}
-	boolean getCancelSlot(int a1,int a2,int a3,String a4[])
+	boolean getCancelSlot(int a1,int a2,int a3,String a4[],int a5)
 	{
 		date=a1-1;
 		startT=a2;
 		endT=a3;
+		slot=a5;
 		
-		for(int i=startT;i<startT+endT+1;i++)
+		for(int j=startT;j<startT+endT+1;j++)
 		{
-			if(customer[date][slot][i].getId(a4))
+			if(parking[date][slot][j]);
+			else 
 			{
-				key=true;
+				if(customer[date][slot][j].getId(a4))key=true;
+				else key=false;
 			}
-			else key=false;
 		}
 		return key;
 	}

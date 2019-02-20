@@ -15,6 +15,7 @@ public class Parking_1 extends JFrame{
 	{
 		instance=a1;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("PARKINGLOT");
 		add(new Page1());
 		setSize(800,600);setVisible(true);
 	}
@@ -58,28 +59,30 @@ public class Parking_1 extends JFrame{
 			
 			JLabel la=new JLabel(" Jan");la.setFont(new Font("Verdana",Font.PLAIN,20));
 			add(la);
-			for(int i=0;i<3;i++)add(new JLabel(""));
-			for(int i=0;i<5;i++)add(new JLabel(""));
+			for(int i=0;i<8;i++)add(new JLabel());
+			
+			
 			calendarbutton=new JButton[31];
 			for(int i=0;i<31;i++)
 			{
 				calendarbutton[i]=new JButton((i+1)+"");
 				calendarbutton[i].setBackground(Color.white);
-				calendarbutton[i].addActionListener(new event());
+				calendarbutton[i].addActionListener(new ActionListener() 
+				{
+					
+					public void actionPerformed(ActionEvent e) 
+					{
+						
+						getdate=(JButton)e.getSource();
+						for(int i=0;i<31;i++)calendarbutton[i].setBackground(Color.white);
+						getdate.setBackground(Color.green);
+					}
+				});
 				add(calendarbutton[i]);
 			}
-			for(int i=0;i<2;i++)add(new JLabel(""));
 		}
 	} 
-	private class event implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			getdate=(JButton)e.getSource();
-			for(int i=0;i<31;i++)calendarbutton[i].setBackground(Color.white);
-			getdate.setBackground(Color.green);
-		}
-	}
+	
 	private class Date extends Panel
 	{
 		Date()
@@ -90,14 +93,12 @@ public class Parking_1 extends JFrame{
 			
 			String timeArr[]= new String[12];
 			for(int i=0;i<timeArr.length;i++)timeArr[i]=new String((i+9)+":00");
+			
 			String hourArr[]=new String[6];
 			for(int i=0;i<hourArr.length;i++)hourArr[i]=new String((i+1)+"hours");
 			
 			timeCombo[0]=new JComboBox<String>(timeArr);
 			timeCombo[1]=new JComboBox<String>(hourArr);
-			
-			timeCombo[0].setLocation(20,30);
-			timeCombo[1].setLocation(20,100);
 			
 			timeCombo[0].addActionListener(new ActionListener() {
 				
@@ -113,10 +114,10 @@ public class Parking_1 extends JFrame{
 					index2=((JComboBox<String>)e.getSource()).getSelectedIndex();	
 				}
 			});
+			
 			for(int i=0;i<2;i++)
 			{
-				timeCombo[i].setSize(200,30);
-				timeCombo[i].setOpaque(true);
+				timeCombo[i].setBounds(20,30+i*70,200,30);
 				add(timeCombo[i]);
 			}
 			
@@ -132,7 +133,7 @@ public class Parking_1 extends JFrame{
 			cancel.addActionListener(new goPage3());
 			add(cancel);
 			
-			error=new JLabel("9:00~21:00use");
+			error=new JLabel("9:00~21:00 USE");
 			error.setForeground(Color.red);
 			error.setSize(130,20);
 			error.setLocation(20,250);

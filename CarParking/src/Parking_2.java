@@ -11,28 +11,37 @@ public class Parking_2 extends JFrame
 	private int calendar,startT,endT,getslot;
 	private ParkingLot instance;
 	private boolean parking[][][];
-	Parking_2(int a1,int a2,int a3,ParkingLot a4,String []a5) 
-	{
-		calendar=a1;
-		startT=a2;
-		endT=a3;
-		instance =a4;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		add(new Page2(a5));
-		setSize(800,600);setVisible(true);
-	}
+	
+	//add
 	public Parking_2(int a1,int a2,int a3,ParkingLot a4) 
 	{
 		calendar=a1;
 		startT=a2;
 		endT=a3;
 		instance =a4;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("PARKINGLOT");
 		add(new Page2());
 		setSize(800,600);setVisible(true);
 	}
+	//cancel
+	Parking_2(int a1,int a2,int a3,ParkingLot a4,String []a5) 
+	{
+		calendar=a1;
+		startT=a2;
+		endT=a3;
+		instance =a4;
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("PARKINGLOT");
+		add(new Page2(a5));
+		setSize(800,600);setVisible(true);
+	}
+	
 	private class Page2 extends Panel
 	{
+		//add
 		Page2()
 		{
 			setLayout(null);
@@ -40,7 +49,7 @@ public class Parking_2 extends JFrame
 			Parking p1=new Parking();
 			p1.setLocation(40,30);
 			
-			JButton b=new JButton("click");
+			JButton b=new JButton("add");
 			b.setFont(new Font("Arial",Font.PLAIN,18));
 			b.setBounds(695,470,70,40);
 			b.addActionListener(new goPage3());
@@ -48,6 +57,7 @@ public class Parking_2 extends JFrame
 			add(p1);add(b);
 			setSize(800,600);
 		}
+		//cancel
 		Page2(String []a1)
 		{
 			setLayout(null);
@@ -72,7 +82,7 @@ public class Parking_2 extends JFrame
 		    Image img = tk.getImage("img/parking.png"); 
 		    g.drawImage(img, 0, 0,650,480, this); 
 		}
-		
+		//add
 		Parking()
 		{
 			parking=instance.getSlot();
@@ -97,8 +107,7 @@ public class Parking_2 extends JFrame
 				{
 					for(int k=startT;k<startT+endT+1;k++)
 					{
-						if(parking[calendar-1][j][k])slot[j].setBackground(Color.white);
-							
+						if(parking[calendar-1][j][k])slot[j].setBackground(Color.white);	
 						else 
 						{
 							slot[j].setBackground(Color.red);
@@ -110,7 +119,7 @@ public class Parking_2 extends JFrame
 			setOpaque(false);
 			setSize(680,500);
 		}
-		 
+		//cancel
 		Parking(String a1[])
 		{
 			setLayout(null);
@@ -136,18 +145,24 @@ public class Parking_2 extends JFrame
 			setSize(680,500);
 		}
 	}
+	//slot-button event
 	private class event_1 implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
+			parking=instance.getSlot();
 			s=(JButton)e.getSource();
 			for(int j=0;j<parking[0].length;j++)
 			{
 				for(int k=startT;k<startT+endT+1;k++)
 				{
 					if(parking[calendar-1][j][k])slot[j].setBackground(Color.white);
-					else break;
+					else 
+					{
+						slot[j].setBackground(Color.red);
+						slot[j].setEnabled(false);
+						break;
+					}
 				}
 			}
 			for(int j=0;j<slot.length;j++)
@@ -159,6 +174,7 @@ public class Parking_2 extends JFrame
 			}
 		}	
 	}
+	//ADD button >parking3
 	private class goPage3 implements ActionListener
 	{
 		@Override
@@ -175,6 +191,7 @@ public class Parking_2 extends JFrame
 			}
 		}
 	}
+	//CANCEL button >parking1
 	private class goPage1 implements ActionListener
 	{
 		private String id[];
