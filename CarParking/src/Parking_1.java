@@ -1,12 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-public class Parking_1 extends JFrame{
+public class Parking_1{
 	private JButton calendarbutton[];
 	private JButton getdate;
 	private int index1,index2;
 	private JLabel error;
 	private ParkingLot instance;
+	private JFrame f;
 	public static void main(String[] args) {
 		ParkingLot p=new ParkingLot();
 		new Parking_1(p);
@@ -14,10 +15,12 @@ public class Parking_1 extends JFrame{
 	public Parking_1(ParkingLot a1)
 	{
 		instance=a1;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("PARKINGLOT");
-		add(new Page1());
-		setSize(800,600);setVisible(true);
+		f=new JFrame();
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setTitle("PARKINGLOT");
+		f.add(new Page1());
+		f.setSize(800,600);
+		f.setVisible(true);
 	}
 	private class Page1 extends Panel
 	{
@@ -151,6 +154,7 @@ public class Parking_1 extends JFrame{
 				int x=Integer.parseInt(getdate.getText().toString());
 				new Parking_2(x,index1,index2,instance);
 				System.out.println(x+" "+index1+" "+index2);
+				f.dispose();
 			}
 		}	
 	}
@@ -163,6 +167,7 @@ public class Parking_1 extends JFrame{
 			{
 				int x=Integer.parseInt(getdate.getText().toString());
 				new Parking_3(x,index1,index2,instance);
+				f.dispose();
 			}
 		}
 	}

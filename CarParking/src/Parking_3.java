@@ -1,13 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-public class Parking_3 extends JFrame
+public class Parking_3
 {
 	private int calendar,startT,endT,slot;
 	private JTextField text[];
 	private ParkingLot instance;
 	private boolean key;
 	private String id[];
+	private JFrame f;
 	//ADD
 	Parking_3(int a1,int a2,int a3,int a4,ParkingLot a5)
 	{
@@ -17,11 +18,13 @@ public class Parking_3 extends JFrame
 		endT=a3;
 		slot=a4;
 		instance=a5;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("PARKINGLOT");
-		setContentPane(new Page3());
+		f=new JFrame();
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setTitle("PARKINGLOT");
+		f.add(new Page3());
 		
-		setSize(800,600);setVisible(true);
+		f.setSize(800,600);
+		f.setVisible(true);
 	}
 	//CANCEL
 	Parking_3(int a1,int a2,int a3,ParkingLot a4)
@@ -31,10 +34,12 @@ public class Parking_3 extends JFrame
 		endT=a3;
 		instance=a4;
 		key=false;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("PARKINGLOT");
-		setContentPane(new Page3());
-		setSize(800,600);setVisible(true);
+		f=new JFrame();
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setTitle("PARKINGLOT");
+		f.setContentPane(new Page3());
+		f.setSize(800,600);
+		f.setVisible(true);
 	}
 	private class Page3 extends Panel
 	{
@@ -121,12 +126,17 @@ public class Parking_3 extends JFrame
 					{	
 						instance.setSlot(calendar,startT,endT,slot,id);
 						new Parking_1(instance);
+						f.dispose();
 					}
 					//cancel >goParking2
 					else
 					{
 						int k=instance.getCancel(calendar, startT, endT, id);
-						if(instance.getCancelSlot(calendar,startT,endT,id,k))new Parking_2(calendar,startT,endT,instance,id);
+						if(instance.getCancelSlot(calendar,startT,endT,id,k))
+							{
+								new Parking_2(calendar,startT,endT,instance,id);
+								f.dispose();
+							}
 					}
 				}
 			}

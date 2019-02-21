@@ -4,14 +4,14 @@ import java.awt.event.*;
 import java.awt.Graphics; 
 import java.awt.Image; 
 import java.awt.Toolkit; 
-public class Parking_2 extends JFrame
+public class Parking_2
 {
 	private JButton s;
 	private JButton slot[];
 	private int calendar,startT,endT,getslot;
 	private ParkingLot instance;
 	private boolean parking[][][];
-	
+	private JFrame f;
 	//add
 	public Parking_2(int a1,int a2,int a3,ParkingLot a4) 
 	{
@@ -19,11 +19,12 @@ public class Parking_2 extends JFrame
 		startT=a2;
 		endT=a3;
 		instance =a4;
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("PARKINGLOT");
-		add(new Page2());
-		setSize(800,600);setVisible(true);
+		f=new JFrame();
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setTitle("PARKINGLOT");
+		f.add(new Page2());
+		f.setSize(800,600);
+		f.setVisible(true);
 	}
 	//cancel
 	Parking_2(int a1,int a2,int a3,ParkingLot a4,String []a5) 
@@ -32,11 +33,12 @@ public class Parking_2 extends JFrame
 		startT=a2;
 		endT=a3;
 		instance =a4;
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("PARKINGLOT");
-		add(new Page2(a5));
-		setSize(800,600);setVisible(true);
+		f=new JFrame();
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setTitle("PARKINGLOT");
+		f.add(new Page2(a5));
+		f.setSize(800,600);
+		f.setVisible(true);
 	}
 	
 	private class Page2 extends Panel
@@ -198,6 +200,7 @@ public class Parking_2 extends JFrame
 				{
 					new Parking_3(calendar,startT,endT,j,instance);
 					System.out.println((j+1)+"");
+					f.dispose();
 				}		
 			
 			}
@@ -217,6 +220,7 @@ public class Parking_2 extends JFrame
 			instance.setCancelSlot(calendar,startT,endT,getslot,id);
 			new Parking_1(instance);
 			System.out.println((getslot+1)+"");
+			f.dispose();
 		}
 	}
 }
