@@ -6,7 +6,6 @@ public class Customer
 	private String pw;
 	private int tel;
 	private String name;
-	private Money m;
 	Customer(String a1[])
 	{
 		id=a1[0];
@@ -18,5 +17,9 @@ public class Customer
 	{
 		if(a1[0].equals(id)&&a1[1].equals(pw)&&a1[2].equals(name)&&a1[3].equals(tel)) return true;
 		else return false;
+	}
+	String getId()
+	{
+		return id;
 	}
 }
