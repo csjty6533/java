@@ -14,12 +14,12 @@ public class Login extends JPanel implements ActionListener{
 	private JTextField code;
 	private JButton b1;
 	private static Main frame=new Main();
-	private Pay pay=new Pay();
+	private static Pay pay=new Pay();
 	private Home home;
 	Login()
 	{
 		setLayout(null);
-		setBackground(Color.black);
+		setBackground(new Color(051,051,051));
 		JLabel la_code=new JLabel("CODE");
 		add(la_code);
 		//la_code.setBackground(Color.white);
@@ -31,9 +31,10 @@ public class Login extends JPanel implements ActionListener{
 		add(code);
 		code.setBounds(345,250,150,30);
 		
-		b1=new JButton("»Æ¿Œ");
+		b1=new JButton("ÌôïÏù∏");
 		b1.setBounds(500,250,70,30);
-		b1.setBackground(Color.white);
+		b1.setBackground(new Color(204,000,051));
+        b1.setForeground(Color.white);
 		b1.addActionListener(this);
 		add(b1);
 		
@@ -49,5 +50,9 @@ public class Login extends JPanel implements ActionListener{
         frame.getPanel().add("pay",pay);
 		frame.getCard().show(frame.getPanel(), "home");
 		
+	}
+	public Pay getPay()
+	{
+		return pay;
 	}
 }

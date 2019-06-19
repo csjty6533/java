@@ -18,21 +18,21 @@ public class Home extends JPanel implements ActionListener{
 	{
 		code=num;
 		setLayout(null);
-		setBackground(Color.black);
+		setBackground(new Color(051,051,051));
 		btn=new JButton[5][6];
 		
 		for(int i=0;i<5;i++)
 		{
 			for(int j=0;j<6;j++)
 			{
-				btn[i][j]=new JButton("<html><p style='color:#ea7722;'>NUM:"+(i*6+j+1)+"</p>½Ã°£:<br/>¿ä±Ý</html>");
-				btn[i][j].setBounds(10+j*130,10+i*100,120,80);
+				btn[i][j]=new JButton("<html><p style='color:#ea7722;'>NUM:"+(i*6+j+1)+"</p>ì‹œê°„:     <br/>ìš”ê¸ˆ:     </html>");
+				btn[i][j].setBounds(20+j*130,70+i*100,120,80);
 				btn[i][j].setBackground(Color.white);
 				add(btn[i][j]);
 				if(code!=null&&Integer.parseInt(code)==(i*6+j+1))
 					{
 						btn[i][j].setBackground(Color.green);
-						btn[i][j].setText("<html><p style='color:#ea7722;'>NUM:"+(i*6+j+1)+"</p>½Ã°£:"+sdf.format(new Date())+"~<br/>¿ä±Ý</html>");
+						btn[i][j].setText("<html><p style='color:#ea7722;'>NUM:"+(i*6+j+1)+"</p>ì‹œê°„:     "+sdf.format(new Date())+"~<br/>ìš”ê¸ˆ:     </html>");
 					}
 			}
 		}	

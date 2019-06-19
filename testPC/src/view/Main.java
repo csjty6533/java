@@ -1,7 +1,7 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,9 +54,9 @@ public class Main extends JFrame implements ActionListener{
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-        
+        contentPane.setBackground(new Color(051,051,051));
         panel = new JPanel();
-        panel.setBounds(10, 100, 800, 500);
+        panel.setBounds(0, 0, 800, 675);
         
         panel.setLayout(card);
         panel.add("login",login);
@@ -64,21 +64,28 @@ public class Main extends JFrame implements ActionListener{
         //panel.add("pay",pay);
         card.show(panel, "login");
         
-        b1 = new JButton("ȭ�� 1");
-        b1.setBounds(12, 10, 97, 35);
+        b1 = new JButton("처음으로");
+        b1.setBounds(822, 100, 100, 55);
+        b1.setBackground(new Color(204,000,051));
+        b1.setForeground(Color.white);
         contentPane.add(b1);
         
-        //b2 = new JButton("ȭ�� 2");
-        //b2.setBounds(121, 10, 97, 35);
-        //contentPane.add(b2);
+        b2 = new JButton("좌석");
+        b2.setBounds(822, 200, 100, 55);
+        b2.setBackground(new Color(204,000,051));
+        b2.setForeground(Color.white);
+        contentPane.add(b2);
         
-        //b3 = new JButton("ȭ�� 3");
-        //b3.setBounds(240, 10, 97, 35);
-        //contentPane.add(b3);
+        b3 = new JButton("상품주문");
+        b3.setBounds(822, 300, 100, 55);
+        b3.setBackground(new Color(204,000,051));
+        b3.setForeground(Color.white);
+        contentPane.add(b3);
         
         b1.addActionListener(this);
-        //b2.addActionListener(this);
-        //b3.addActionListener(this);
+        
+        b2.addActionListener(this);
+        b3.addActionListener(this);
         contentPane.add(panel);
 	}
 	@Override
@@ -88,11 +95,13 @@ public class Main extends JFrame implements ActionListener{
 	        if(ob == b1) {
 	            card.show(panel, "login");
 	        }
-	        //else if(ob == b2) {
-	        //    card.show(panel, "home");
-	        //}else if(ob == b3) {
-	       //     card.show(panel, "pay");
-	        //}
+	        else if(ob == b2) {
+	            card.show(panel, "home");
+	        }
+	        else if(ob == b3) {
+	            card.show(panel, "pay");
+	            frame.setTitle("상품주문");
+	        }
 	
 	}
 	public CardLayout getCard()
@@ -102,5 +111,9 @@ public class Main extends JFrame implements ActionListener{
 	public JPanel getPanel()
 	{
 		return panel;
+	}
+	public Login getLogin()
+	{
+		return login;
 	}
 }
